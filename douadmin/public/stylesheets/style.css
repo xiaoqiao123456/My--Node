@@ -1,8 +1,101 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+html,body,ul,li,ol,dl,dd,dt,p,h1,h2,h3,h4,h5,h6,form,fieldset,legend,img,input,figure{margin:0;padding:0;}
+body{font-family: "微软雅黑";}
+ul,ol,li{list-style:none;}
+a,u{text-decoration: none;}
+i,em{font-style:normal;}
+b,strong{font-weight: 100;}
+h1,h2,h3,h4,h5,h6,{font-size:16px;font-weight: 100;}
+img{border:0;display:block;}
+input{outline: none;}
+body{
+	width:100%;
+	height: 100%;
+	background: url(../images/ecshop-bg.png) no-repeat;
+	background-size: cover;
+}
+#tit{
+	float: left;
+	margin: 40px 0 40px 50px;
+}
+.main{
+	position: absolute;
+	top:50%;
+	left: 0;
+	right: 0;
+	width: 475px;
+	margin: auto;
+	transform: translateY(-50%);
+}
+#logo{
+	width: 248px;
+	height: 65px;
+	margin:0 auto;
+}
+#message{
+	height: 350px;
+	margin-top: 50px;
+	padding-bottom: 42px;
+	overflow: hidden;
+	background: url(../images/icloud-bar.png) no-repeat 0 bottom;
+}
+#bd{
+	position: absolute;
+	left: 16px;
+	z-index: 2;
+	width:302px;
+	background: rgba(255,255,255,.85);
+	height: 277px;
+	padding: 50px 70px 25px;
+}
+.iconphone {
+  display: block;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 10;
+}
+.control{
+	position: relative;
+	border-radius: 5px 5px 0 0;
+	border: 1px solid #ddd;
+	border-top:0;
+	background: #fff;
+	height: 51px;
+}
+.control input{
+	float: right;
+	width:80%;
+	border: 0;
+	height: 51px;
+	line-height: 51px;
+	font-size: 12px;
+}
+.last{
+	background: none;
+	margin-top: 20px;
+	border: 0;
+}
+.control #btn{
+	width: 100%;
+	height: 100%;
+	background: #fc7878;
+	border-radius: 4px;
+	text-align: center;
+	line-height: 51px;
+	font-size: 16px;
+	color: #fff;
 }
 
-a {
-  color: #00B7FF;
-}
+
+
+
+
+
+
+
+
+
+
+
