@@ -29,7 +29,7 @@
               				</g>
             			</g>
           			</svg>
-					<input type="password" placeholder="密码" id="password" />
+					<input type="password" placeholder="密码" id="psw" />
 				</p>
 				<p class="control">
 					<svg class="iconphone" width="20px" height="20px" viewBox="0 0 20 20">
@@ -42,7 +42,7 @@
 					<input type="text" placeholder="验证码" />
 				</p>
 				<p class="control last">
-					<input type="submit" value="登 录" id="btn" onclick="logup()"/>
+					<input type="submit" value="登 录" id="btn" onclick="login()"/>
 				</p>
 				
 			</form>
@@ -53,15 +53,15 @@
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
 </script>
 <script>
-	function logup(){
+	function login() {
 		$.ajax({
-			type:"post",
-			url:"/api/login",
-			data:{
-				username:$("#username").val(),
-				psw:$("#password").val()
+			url: "/api/login",
+			type: "post",
+			data: {
+				username: $("#username").val(),
+				psw: $("#psw").val()
 			},
-			success:function(res){
+			success: function(res) {
 				console.log(res);
 				if(res.status == 1) {
 					location.href = "https://www.baidu.com";
@@ -69,6 +69,6 @@
 					alert(res.message);
 				}
 			}
-		});
+		})
 	}
 </script>

@@ -13,7 +13,7 @@ var app = express();
 // 连接数据库
 var mongoose = require('mongoose');
 // 一定要首先启动数据库
-mongoose.connect('mongodb://localhost/usermessage');
+mongoose.connect('mongodb://localhost/h51725');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

@@ -10,13 +10,15 @@ router.get('/', function(req, res) {
 router.post('/api/login',function(req, res){
 	var username = req.body.username;
 	var psw = req.body.psw;
-	
+	console.log(username,psw);
 	var result = {
 		status: 1,
 		message: "登录成功"
 	}
+	
 	UserModel.find({username:username,psw:psw}, function(err, docs){
-		if(!err && docs.length > 0) {
+		console.log(docs);
+		if(!err) {
 			console.log("登录成功");
 			res.send(result);
 		} else {
