@@ -1,12 +1,39 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <p>11111</p>
-  </body>
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>管理中心</title>
+	<link rel="stylesheet" href="/stylesheets/style.css"/>
+	<style type="text/css">
+		#one{
+			width: 100%;
+			height: 118px;
+			background: #212121;
+			border-bottom: 1px solid #000;
+		}
+		#two{
+			width: 14.5%;
+			height: 546px;
+			margin-top: -4px;
+		}
+		#thr{
+			width: 0.5%;
+			height: 546px;
+			margin-top: -4px;
+			margin-left: -5px;
+		}
+		#four{
+			width: 85%;
+			height: 546px;
+			margin-top: -4px;
+			margin-left: -5px;
+		}
+	</style>
+</head>
+	<body>
+		<iframe src="head" scrolling="no" frameborder="0" framespacing="0" id="one"></iframe>
+		<iframe src="left" scrolling="yes" frameborder="0" framespacing="0" id="two"></iframe>
+		<iframe src="center" scrolling="yes" frameborder="0" framespacing="0" id="thr"></iframe>
+		<iframe name="right_main" src="right_list" scrolling="yes" frameborder="0" framespacing="0" id="four"></iframe>
+	</body>
 </html>

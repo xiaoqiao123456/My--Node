@@ -4,9 +4,29 @@ var md5 = require("md5");
 var UserModel = require("../model/UserModel");
 
 /* GET home page. */
-router.get('/', function(req, res) {
+router.get('/', function(req, res,next) {
   res.render('login', {});
 });
+
+router.get('/index', function(req, res,next) {
+  res.render('index', {});
+});
+router.get('/head', function(req, res,next) {
+  res.render('head', {});
+});
+router.get('/left', function(req, res,next) {
+  res.render('left', {});
+});
+router.get('/center', function(req, res,next) {
+  res.render('center', {});
+});
+router.get('/right', function(req, res,next) {
+  res.render('right', {});
+});
+router.get('/right_list', function(req, res,next) {
+  res.render('right_list', {});
+});
+
 router.post('/api/login',function(req, res){
 	var username = req.body.username;
 	var psw = req.body.psw;
