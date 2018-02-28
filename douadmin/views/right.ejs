@@ -44,89 +44,96 @@
 			</li>
 		</ul>
 		<div class="good_add">
-			<p>
-				<label for="">商品名称：</label>
-				<input type="text" size="25" />
-			</p>
-			<p>
-				<label for="">商品货号：</label>
-				<input type="text" />
-			</p>
-			<p>
-				<label for="">商品分类：</label>
-				<select name="">
-					<option value="">请选择...</option>
-					<option value="">钻石</option>
-					<option value="">衬衫</option>
-					<option value="">裤子</option>
-				</select>
-			</p>
-			<p>
-				<label for="">扩展分类：</label>
-				<input type="button" value="添加" class="button" />
-			</p>
-			<p>
-				<label for="">商品品牌：</label>
-				<select name="">
-					<option value="">请选择...</option>
-					<option value="">钻石</option>
-					<option value="">衬衫</option>
-					<option value="">裤子</option>
-				</select>
-			</p>
-			<p>
-				<label for="">本店售价：</label>
-				<input type="text" />
-			</p>
-			<p>
-				<label for="">会员价格：</label>
-				<input type="text" />
-			</p>
-			<p>
-				<label for="">商品优惠价格：</label>
-				<input type="text" />
-			</p>
-			<p>
-				<label for="">市场售价：</label>
-				<input type="text" />
-			</p>
-			<p>
-				<label for="">虚拟销量：</label>
-				<input type="text" />
-			</p>
-			<p>
-				<label for="">赠送消费积分数：</label>
-				<input type="text" />
-			</p>
-			<p>
-				<label for="">赠送等级积分数：</label>
-				<input type="text" />
-			</p>
-			<p>
-				<label for="">积分购买金额：</label>
-				<input type="text" />
-			</p>
-			<p>
-				<label for="">促销价：</label>
-				<input type="text" />
-			</p>
-			<p>
-				<label for="">促销日期：</label>
-				<input type="text" />
-			</p>
-			<p>
-				<label for="">上传商品图片：</label>
-				<input type="file" />
-			</p>
-			<p>
-				<label for="">上传商品缩略图：</label>
-				<input type="file" />
-			</p>
-			<p class="btn">
-				<input type="button" value="确定" class="button" />
-				<input type="button" value="重置" class="button" />
-			</p>	
+			<form id="frm" action="/api/add_goods" method="post" enctype="multipart/form-data">				
+				<p>
+					<label for="">商品名称：</label>
+					<input type="text" size="25" name="goods_name" />
+				</p>
+				<p>
+					<label for="">商品货号：</label>
+					<input type="text" />
+				</p>
+				<p>
+					<label for="">商品分类：</label>
+					<select name="">
+						<option value="">请选择...</option>
+						<option value="">钻石</option>
+						<option value="">衬衫</option>
+						<option value="">裤子</option>
+					</select>
+				</p>
+				<p>
+					<label for="">扩展分类：</label>
+					<input type="button" value="添加" class="button" />
+				</p>
+				<p>
+					<label for="">商品品牌：</label>
+					<select name="">
+						<option value="">请选择...</option>
+						<option value="">钻石</option>
+						<option value="">衬衫</option>
+						<option value="">裤子</option>
+					</select>
+				</p>
+				<p>
+					<label for="">本店售价：</label>
+					<input type="text" />
+				</p>
+				<p>
+					<label for="">会员价格：</label>
+					<input type="text" name="price" />
+				</p>
+				<p>
+					<label for="">商品优惠价格：</label>
+					<input type="text" />
+				</p>
+				<p>
+					<label for="">市场售价：</label>
+					<input type="text" />
+				</p>
+				<p>
+					<label for="">虚拟销量：</label>
+					<input type="text" />
+				</p>
+				<p>
+					<label for="">赠送消费积分数：</label>
+					<input type="text" />
+				</p>
+				<p>
+					<label for="">赠送等级积分数：</label>
+					<input type="text" />
+				</p>
+				<p>
+					<label for="">积分购买金额：</label>
+					<input type="text" />
+				</p>
+				<p>
+					<label for="">促销价：</label>
+					<input type="text" />
+				</p>
+				<p>
+					<label for="">促销日期：</label>
+					<input type="text" />
+				</p>
+				<p>
+					<label for="">上传商品图片：</label>
+					<input type="file" name="img" />
+				</p>
+				<p>
+					<label for="">上传商品缩略图：</label>
+					<input type="file" />
+				</p>
+				<p class="btn">
+					<input type="button" value="确定" class="button" onclick="addGoods()" />
+					<input type="button" value="重置" class="button" />
+				</p>
+			</form>
 		</div>
 	</div>
 </body>
 </html>
+<script>
+	function addGoods(){
+		document.getElementById("frm").submit();
+	}
+</script>

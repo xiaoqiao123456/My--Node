@@ -39,25 +39,27 @@
 				<th>虚拟销量</th>
 				<th>操作</th>
 			</tr>
-			<tr>
-				<td>1</td>
-				<td>1</td>
-				<td>1</td>
-				<td>1</td>
-				<td>1</td>
-				<td>1</td>
-				<td>1</td>
-				<td>1</td>
-				<td>1</td>
-				<td>1</td>
-				<td>1</td>
-				<td>
-					<img src="/images/icon_view.gif"/>
-					<img src="/images/icon_view.gif"/>
-					<img src="/images/icon_view.gif"/>
-					<img src="/images/icon_view.gif"/>
-				</td>
-			</tr>
+			<% for(var i=0;i<list.length;i++){ %>
+				<tr>
+					<td><%= i+1 %></td>
+					<td><%= list[i].goods_name %></td>
+					<td>1</td>
+					<td><%= list[i].price %></td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>
+						<img src="/images/icon_view.gif"/>
+						<img src="/images/icon_edit.gif"/>
+						<img src="/images/icon_copy.gif"/>
+						<img src="/images/icon_trash.gif"/>
+					</td>
+				</tr>
+			<% } %>
 		</table>
 		<p id="count">
 			总计 <span></span>个记录分为 <span></span> 页
