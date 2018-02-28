@@ -4,6 +4,8 @@
 	<meta charset="UTF-8" />
 	<title>list</title>
 	<link rel="stylesheet" href="/stylesheets/style.css"/>
+	<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+</script>
 </head>
 <body style="background: url(/images/body_bj.jpg); padding: 10px;">
 	<h1 id="top">
@@ -17,9 +19,9 @@
 		<span class="r">添加新商品</span>
 	</h1>
 	<div class="search">
-		<label for="">关键字</label>
-		<input type="text" name="" id="" value="" />
-		<input type="button" id="" value="搜索" class="button" />
+		<label for="">关键字:</label>
+		<input type="text" name="keyword" id="keyword" placeholder="请输入商品名称" />
+		<input type="button" onclick="search()" id="" value="搜索" class="button" />
 	</div>
 	<div class="list">
 		<table border="0" cellspacing="0" cellpadding="0" width="100%">
@@ -41,8 +43,11 @@
 			</tr>
 			<% for(var i=0;i<list.length;i++){ %>
 				<tr>
-					<td><%= i+1 %></td>
-					<td><%= list[i].goods_name %></td>
+					<td class="jishu">
+						<input type="checkbox" name="" id="" value="" />
+						<span class="s"><%= i+1 %></span>
+					</td>
+					<td class="name"><%= list[i].goods_name %></td>
 					<td>1</td>
 					<td><%= list[i].price %></td>
 					<td>1</td>
@@ -52,18 +57,18 @@
 					<td>1</td>
 					<td>1</td>
 					<td>1</td>
-					<td>
+					<td class="end">
 						<img src="/images/icon_view.gif"/>
 						<img src="/images/icon_edit.gif"/>
 						<img src="/images/icon_copy.gif"/>
-						<img src="/images/icon_trash.gif"/>
+						<img src="/images/icon_trash.gif" class="del"/>
 					</td>
 				</tr>
 			<% } %>
 		</table>
 		<p id="count">
-			总计 <span></span>个记录分为 <span></span> 页
-			当前第 <span></span> 页，每页<input type="text" id="num" />
+			总计 <span id="jishu"><%= list.length %></span>个记录分为 <span id="c_page"></span> 页
+			当前第 <span id="present"></span> 页，每页<input type="text" id="num" value="1" />个，
 			<span>
 				<a href="">第一页</a>
 				<a href="">上一页</a>
@@ -79,13 +84,104 @@
 	</div>
 </body>
 </html>
-<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
-</script>
+
 <script>
-	$("tr").mouseenter(function(){
+	$("table").on("mouseenter","tr",function(){
 		$(this).find("td").css("background-color","rgb(244,250,251)");
-	}).mouseleave(function(){
+	}).on("mouseleave","tr",function(){
 		$(this).find("td").css("background-color","rgb(255,255,255)");
+	})
+	
+	//分为几页功能
+	function pagecount(){
+		$("#c_page").html(Math.ceil($("#jishu").html()/$("#num").val()));
+	}
+	pagecount();
+	$("#num").keyup(function(e){
+		var e=e||event;
+		if(e.keyCode ==13){
+		    pagecount();
+		}
+	})
+	//查询
+	function search(){
+		$.ajax({
+			type:"post",
+			url:"/api/search",
+			data:{
+				goods_name:$("#keyword").val()
+			},
+			success:function(res){
+				var html=`
+							<tr>
+				<th>
+					<input type="checkbox" name="" id="" value="" />编号
+				</th>	
+				<th>商品名称</th>
+				<th>货号</th>
+				<th>价格</th>
+				<th>上架</th>
+				<th>精品</th>
+				<th>新品</th>
+				<th>热销</th>
+				<th>推荐排序</th>
+				<th>库存</th>
+				<th>虚拟销量</th>
+				<th>操作</th>
+			</tr>
+						`;
+				for(var i=0; i<res.length;i++){
+					html+=`
+							<tr>
+					<td class="jishu">
+						<input type="checkbox" name="" id="" value="" />
+						<span class="s">${i+1}</span>
+					</td>
+					<td class="name">${res[i].goods_name}</td>
+					<td>1</td>
+					<td>${res[i].price}</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td class="end">
+						<img src="/images/icon_view.gif"/>
+						<img src="/images/icon_edit.gif"/>
+						<img src="/images/icon_copy.gif"/>
+						<img src="/images/icon_trash.gif" class="del"/>
+					</td>
+				</tr>	
+						`;
+				}
+				$("table").html(html);
+			}
+		});
 		
+	}
+	//删除
+	$("table").on("click",$(".del"),function(){
+		//console.log("开始删除商品");
+		if(confirm("确认删除该商品吗？")){
+			//console.log($(this));
+			$(this).children().find("td").remove();
+			var name=$(this).parent()
+							.parent()
+							.find(".name").html();
+			console.log(name);
+			/*$.ajax({
+				type:"post",
+				url:"/api/del",
+				data:{
+					name:name
+				},
+				success:function(res){
+					$(this).parent().parent().remove();
+					console.log(res);
+				}
+			});*/
+		}
 	})
 </script>

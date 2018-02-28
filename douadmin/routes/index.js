@@ -30,12 +30,28 @@ router.get('/center', function(req, res,next) {
 router.get('/right', function(req, res,next) {
   res.render('right', {});
 });
+
+//查询功能
+router.post('/api/search',function(req,res){
+	GoodsModel.find({ goods_name :{ $regex:req.body.goods_name } }, function(err, docs) {
+		res.send(docs);//docs是查询结果，是一个数组
+	})
+})
+
+//删除功能
+router.post('/api/del',function(req,res){ 
+	GoodsModel.remove({ goods_name : req.body.name },function(err,docs){
+		res.send(docs);
+	})
+})
+
 //商品列表路由
 router.get('/right_list', function(req, res){
 	GoodsModel.find({}, function(err, docs) {
 		res.render("right_list", {list: docs});
-	})
+	}).limit(2)
 })
+
 //文件上传
 router.post('/api/add_goods',function(req,res){
 	var Form = new multiparty.Form({

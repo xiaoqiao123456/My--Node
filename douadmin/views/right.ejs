@@ -4,6 +4,8 @@
 	<meta charset="UTF-8" />
 	<title>right</title>
 	<link rel="stylesheet" href="/stylesheets/style.css"/>
+	<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+</script>
 </head>
 <body style="background: url(/images/body_bj.jpg); padding: 10px;">
 	<h1 id="top">
@@ -47,7 +49,7 @@
 			<form id="frm" action="/api/add_goods" method="post" enctype="multipart/form-data">				
 				<p>
 					<label for="">商品名称：</label>
-					<input type="text" size="25" name="goods_name" />
+					<input type="text" id="name" size="25" name="goods_name" />
 				</p>
 				<p>
 					<label for="">商品货号：</label>
@@ -77,11 +79,11 @@
 				</p>
 				<p>
 					<label for="">本店售价：</label>
-					<input type="text" />
+					<input type="text" name="price" id="price" />
 				</p>
 				<p>
 					<label for="">会员价格：</label>
-					<input type="text" name="price" />
+					<input type="text" />
 				</p>
 				<p>
 					<label for="">商品优惠价格：</label>
@@ -134,6 +136,11 @@
 </html>
 <script>
 	function addGoods(){
-		document.getElementById("frm").submit();
+		if($("#name").val()&&$("#price").val()){
+			document.getElementById("frm").submit();
+		}else{
+			alert("请输入商品名称和价格");
+		}
+		
 	}
 </script>
