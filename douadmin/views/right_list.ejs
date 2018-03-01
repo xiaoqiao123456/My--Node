@@ -68,12 +68,12 @@
 		</table>
 		<p id="count">
 			总计 <span id="jishu"><%= list.length %></span>个记录分为 <span id="c_page"></span> 页
-			当前第 <span id="present"></span> 页，每页<input type="text" id="num" value="1" />个，
+			当前第 <span id="present">1</span> 页，每页<input type="text" id="num" value="1" />个，
 			<span>
-				<a href="">第一页</a>
-				<a href="">上一页</a>
-				<a href="">下一页</a>
-				<a href="">最末页</a>
+				<a href="javascript:;">第一页</a>
+				<a href="javascript:;">上一页</a>
+				<a href="javascript:;" id="next">下一页</a>
+				<a href="javascript:;">最末页</a>
 				<select name="">
 					<option value="">1</option>
 					<option value="">2</option>
@@ -94,7 +94,63 @@
 	
 	//分为几页功能
 	function pagecount(){
-		$("#c_page").html(Math.ceil($("#jishu").html()/$("#num").val()));
+		var sum=$("#jishu").html();//数据总数
+		var a=$("#num").val();//每页显示数据条数
+		$("#c_page").html(Math.ceil(sum/a));
+		$.ajax({
+			type:"post",
+			url:"/api/page",
+			data:{
+				page:a
+			},
+			success:function(res){
+				var html=`
+							<tr>
+								<th>
+									<input type="checkbox" name="" id="" value="" />编号
+								</th>	
+								<th>商品名称</th>
+								<th>货号</th>
+								<th>价格</th>
+								<th>上架</th>
+								<th>精品</th>
+								<th>新品</th>
+								<th>热销</th>
+								<th>推荐排序</th>
+								<th>库存</th>
+								<th>虚拟销量</th>
+								<th>操作</th>
+							</tr>
+						`;
+				for(var i=0; i<a;i++){
+					html+=`
+							<tr>
+								<td class="jishu">
+									<input type="checkbox" name="" id="" value="" />
+									<span class="s">${i+1}</span>
+								</td>
+								<td class="name">${res[i].goods_name}</td>
+								<td>1</td>
+								<td>${res[i].price}</td>
+								<td>1</td>
+								<td>1</td>
+								<td>1</td>
+								<td>1</td>
+								<td>1</td>
+								<td>1</td>
+								<td>1</td>
+								<td class="end">
+									<img src="/images/icon_view.gif"/>
+									<img src="/images/icon_edit.gif"/>
+									<img src="/images/icon_copy.gif"/>
+									<img src="/images/icon_trash.gif" class="del"/>
+								</td>
+							</tr>	
+						`;
+				}
+				$("table").html(html);
+			}
+		});
 	}
 	pagecount();
 	$("#num").keyup(function(e){
@@ -103,6 +159,74 @@
 		    pagecount();
 		}
 	})
+	//下一页
+	$("#next").click(function(){
+		var n=$("#present").html();
+		if(n==$("#c_page").html()){
+			n=$("#c_page").html();
+			return;
+		}
+		n++;
+		$("#present").html(n);
+		var sum=$("#jishu").html();//数据总数
+		var a=$("#num").val();//每页显示数据条数
+		$("#c_page").html(Math.ceil(sum/a));
+		$.ajax({
+			type:"post",
+			url:"/api/page",
+			data:{
+				page:a
+			},
+			success:function(res){
+				var html=`
+							<tr>
+								<th>
+									<input type="checkbox" name="" id="" value="" />编号
+								</th>	
+								<th>商品名称</th>
+								<th>货号</th>
+								<th>价格</th>
+								<th>上架</th>
+								<th>精品</th>
+								<th>新品</th>
+								<th>热销</th>
+								<th>推荐排序</th>
+								<th>库存</th>
+								<th>虚拟销量</th>
+								<th>操作</th>
+							</tr>
+						`;
+				for(var i=0; i<a;i++){
+					html+=`
+							<tr>
+								<td class="jishu">
+									<input type="checkbox" name="" id="" value="" />
+									<span class="s">${(n-1)*a+1}</span>
+								</td>
+								<td class="name">${res[(n-1)*a].goods_name}</td>
+								<td>1</td>
+								<td>${res[(n-1)*a].price}</td>
+								<td>1</td>
+								<td>1</td>
+								<td>1</td>
+								<td>1</td>
+								<td>1</td>
+								<td>1</td>
+								<td>1</td>
+								<td class="end">
+									<img src="/images/icon_view.gif"/>
+									<img src="/images/icon_edit.gif"/>
+									<img src="/images/icon_copy.gif"/>
+									<img src="/images/icon_trash.gif" class="del"/>
+								</td>
+							</tr>	
+						`;
+				}
+				$("table").html(html);
+			}
+		});
+	})
+	
 	//查询
 	function search(){
 		$.ajax({
@@ -112,6 +236,7 @@
 				goods_name:$("#keyword").val()
 			},
 			success:function(res){
+				$("#jishu").html(res.length);
 				var html=`
 							<tr>
 				<th>
@@ -131,6 +256,7 @@
 			</tr>
 						`;
 				for(var i=0; i<res.length;i++){
+					
 					html+=`
 							<tr>
 					<td class="jishu">
@@ -161,6 +287,7 @@
 		});
 		
 	}
+		
 	//删除
 	$("table").on("click","img",function(e){
 		var e=e||event;

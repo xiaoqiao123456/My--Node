@@ -31,6 +31,15 @@ router.get('/right', function(req, res,next) {
   res.render('right', {});
 });
 
+//分页功能
+router.post('/api/page', function(req, res){
+	//console.log(req.body.page)
+	GoodsModel.find({}, function(err, docs) {
+		res.send(docs);
+		//console.log(docs.length)
+	})//.limit(req.body.page)
+})
+
 //查询功能
 router.post('/api/search',function(req,res){
 	GoodsModel.find({ goods_name :{ $regex:req.body.goods_name } }, function(err, docs) {
@@ -49,7 +58,7 @@ router.post('/api/del',function(req,res){
 router.get('/right_list', function(req, res){
 	GoodsModel.find({}, function(err, docs) {
 		res.render("right_list", {list: docs});
-	}).limit(2)
+	})
 })
 
 //文件上传
@@ -78,7 +87,8 @@ router.post('/api/add_goods',function(req,res){
 		})
 	})
 })
-//登录处理
+
+//登录功能
 router.post('/api/login',function(req, res){
 	var username = req.body.username;
 	var psw = req.body.psw;
