@@ -162,26 +162,26 @@
 		
 	}
 	//删除
-	$("table").on("click",$(".del"),function(){
-		//console.log("开始删除商品");
+	$("table").on("click",$(".del"),function(e){
+		var e=e||event;
+		var target=$(e.target)||$(e.srcElement);
 		if(confirm("确认删除该商品吗？")){
-			//console.log($(this));
-			$(this).children().find("td").remove();
-			var name=$(this).parent()
+			target.parent().parent().remove();
+			var name=target.parent()
 							.parent()
 							.find(".name").html();
 			console.log(name);
-			/*$.ajax({
+			$.ajax({
 				type:"post",
 				url:"/api/del",
 				data:{
 					name:name
 				},
 				success:function(res){
-					$(this).parent().parent().remove();
+					
 					console.log(res);
 				}
-			});*/
+			});
 		}
 	})
 </script>
