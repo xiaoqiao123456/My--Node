@@ -162,26 +162,28 @@
 		
 	}
 	//删除
-	$("table").on("click",$(".del"),function(e){
+	$("table").on("click","img",function(e){
 		var e=e||event;
 		var target=$(e.target)||$(e.srcElement);
-		if(confirm("确认删除该商品吗？")){
-			target.parent().parent().remove();
-			var name=target.parent()
-							.parent()
-							.find(".name").html();
-			console.log(name);
-			$.ajax({
-				type:"post",
-				url:"/api/del",
-				data:{
-					name:name
-				},
-				success:function(res){
-					
-					console.log(res);
-				}
-			});
+		if($(target).is('.del')){//找到含有class名（del）的img	
+			if(confirm("确认删除该商品吗？")){
+				target.parent().parent().remove();
+				var name=target.parent()
+								.parent()
+								.find(".name").html();
+				//console.log(name);
+				$.ajax({
+					type:"post",
+					url:"/api/del",
+					data:{
+						name:name
+					},
+					success:function(res){
+						
+						console.log(res);
+					}
+				});
+			}
 		}
 	})
 </script>
