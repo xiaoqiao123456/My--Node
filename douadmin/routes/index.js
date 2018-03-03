@@ -120,7 +120,7 @@ router.post('/api/login',function(req, res){
 	
 	UserModel.find({username:username,psw:psw}, function(err, docs){
 		console.log(docs);
-		if(!err) {
+		if(!err&&docs.length>0) {
 			console.log("登录成功");
 			res.send(result);
 		} else {
