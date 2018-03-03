@@ -33,11 +33,17 @@ router.get('/right', function(req, res,next) {
 
 //分页功能
 router.post('/api/page', function(req, res){
-	//console.log(req.body.page)
-	GoodsModel.find({}, function(err, docs) {
+	console.log(req.body)
+	var pageNo=parseInt(req.body.pageNo);//当前第几页
+	var count=parseInt(req.body.count);//每页显示多少条
+	var query=GoodsModel.find({})
+											.skip((pageNo-1)*count)
+											.limit(count)
+											.sort({create_data:-1});
+	query.exec(function(err,docs){
 		res.send(docs);
-		//console.log(docs.length)
-	})//.limit(req.body.page)
+		console.log(err,pageNo,count);
+	})
 })
 
 //查询功能
@@ -56,10 +62,24 @@ router.post('/api/del',function(req,res){
 
 //商品列表路由
 router.get('/right_list', function(req, res){
-	GoodsModel.find({}, function(err, docs) {
+	var query=GoodsModel.find({}).sort({create_data:1});
+	query.exec(function(err, docs){
 		res.render("right_list", {list: docs});
 	})
+	/*GoodsModel.find({}, function(err, docs) {
+		res.render("right_list", {list: docs});
+	})*/
 })
+
+/*router.get('/right_list', function(req, res){
+	var page=req.query.page;
+	console.log(page);
+	var query=GoodsModel.find({}).limit(page).sort({create_data: 
+
+1});
+	query.exec(function(err, docs){
+		res.render("right_list", {list: docs});
+})})*/
 
 //文件上传
 router.post('/api/add_goods',function(req,res){
